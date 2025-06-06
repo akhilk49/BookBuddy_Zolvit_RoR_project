@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :books
+  get "dashboard/show"
   root "sessions#new"  # Default landing page is login
 
   # Signup routes
