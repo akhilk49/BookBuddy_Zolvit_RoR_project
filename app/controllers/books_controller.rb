@@ -5,8 +5,9 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = current_user.books
+    @books = Book.where(user_id: current_user.id)
   end
+
 
   # GET /books/1
   def show
