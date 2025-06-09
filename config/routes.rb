@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :books
+  resources :books do
+    resources :reviews, only: [:create]
+  end
+
   get "dashboard/show"
-  root "sessions#new"  # Default landing page is login
+  root "sessions#new"  
 
   # Signup routes
   get  "/signup", to: "users#new"
