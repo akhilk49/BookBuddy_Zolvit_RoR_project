@@ -19,6 +19,14 @@
   </head>
 
   <body>
+    <% if notice %>
+      <p style="color: green;"><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p style="color: red;"><%= alert %></p>
+    <% end %>
+
     <nav style="background-color: #f4f4f4; padding: 10px;">
       <% if logged_in? %>
         <% user = current_user %>
