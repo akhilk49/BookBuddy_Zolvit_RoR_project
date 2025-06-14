@@ -10,6 +10,8 @@ gem "propshaft"
 # Use PostgreSQL as the database
 gem "pg", "~> 1.1"
 
+gem "cssbundling-rails"
+
 # Use the Puma web server
 gem "puma", ">= 5.0"
 
