@@ -1,16 +1,31 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Books" %>
 
-<h1>Books</h1>
+<div class="container mt-5">
 
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% end %>
-</div>
 
-<%= link_to "New book", new_book_path %>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Books</h1>
+    <%= link_to "New Book", new_book_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @books.each do |book| %>
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= book.title %></h5>
+            <p class="card-text"><%= truncate(book.description, length: 100) if book.respond_to?(:description) %></p>
+            <%= link_to "Show this book", book, class: "btn btn-outline-secondary mt-2" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

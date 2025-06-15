@@ -29,19 +29,45 @@
     <% end %>
 
     <% unless controller_name == "users" && action_name == "new" %>
-    <nav style="background-color: #f4f4f4; padding: 10px;">
-      <% if logged_in? %>
-        <% user = current_user %>
-        <span>Welcome, <strong><%= user.name %></strong>!</span> |
-        <%= link_to "Home", books_path %> |
-        <%= link_to "My Books", books_path %> |
-        <%= link_to "Logout", logout_path, method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
-      <% else %>
-        <%= link_to "Login", login_path %> |
-        <%= link_to "Sign Up", signup_path %>
-      <% end %>
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+      <img src="/icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+      <span class="fw-bold">BookBuddy</span>
     <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center">
+        <% if logged_in? %>
+          <li class="nav-item me-3">
+            <span class="nav-link disabled">Welcome, <strong><%= current_user.name %></strong></span>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Home", books_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "My Books", books_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", logout_path, method: :delete, data: { turbo: false, confirm: "Are you sure?" }, class: "nav-link text-danger" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", login_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+<% end %>
+
 
     <%= yield %>
   </body>
