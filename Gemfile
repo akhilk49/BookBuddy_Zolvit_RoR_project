@@ -28,6 +28,8 @@ gem "jbuilder"
 # Secure password handling
 gem "bcrypt", "~> 3.1.7"
 
+gem "image_processing", "~> 1.12"
+
 # Platform-specific gem for Windows/JRuby timezone data
 gem "tzinfo-data", platforms: %i[windows jruby]
 
