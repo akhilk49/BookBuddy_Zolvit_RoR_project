@@ -37,8 +37,9 @@
           <!-- Submit button -->
           <div class="text-center text-lg-start mt-4 pt-2">
             <%= form.submit "Sign Up", class: "btn btn-primary btn-lg", style: "padding-left: 2.5rem; padding-right: 2.5rem;" %>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account?
-              <%= link_to "Login", login_path, class: "link-danger" %>
+            <p class="small fw-bold mt-2 pt-1 mb-0">
+              Already have an account?
+            <%= link_to "Login", login_path, class: "link-danger text-decoration-none ms-1" %>
             </p>
           </div>
         <% end %>
