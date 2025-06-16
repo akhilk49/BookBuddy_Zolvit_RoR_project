@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  get "home/index"
   resources :books do
     resources :reviews, only: [:create]
   end
 
   get "dashboard/show"
-  root "sessions#new"  
+  root "home#index" 
 
   # Signup routes
   get  "/signup", to: "users#new"
