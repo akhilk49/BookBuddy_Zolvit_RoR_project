@@ -1,48 +1,63 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, @book.title %>
 
-<h2><%= @book.title %></h2>
-<p><strong>Author:</strong> <%= @book.author %></p>
-<p><strong>Description:</strong> <%= @book.description %></p>
+<div class="container mt-5">
 
-<hr>
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
 
-<h3>Reviews:</h3>
-<% if @book.reviews.any? %>
-  <ul>
-    <% @book.reviews.each do |review| %>
-      <li>
-        <strong>Rating:</strong> <%= review.rating %>/5 <br>
-        <strong>Comment:</strong> <%= review.comment %>
-      </li>
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="card-title"><%= @book.title %></h2>
+      <p class="card-text"><strong>Author:</strong> <%= @book.author %></p>
+      <p class="card-text"><strong>Description:</strong> <%= @book.description.presence || "No description available." %></p>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h3>Reviews</h3>
+    <% if @book.reviews.any? %>
+      <div class="list-group">
+        <% @book.reviews.each do |review| %>
+          <div class="list-group-item">
+            <strong>Rating:</strong> <%= review.rating %>/5 <br>
+            <strong>Comment:</strong> <%= review.comment %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted">No reviews yet.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>No reviews yet.</p>
-<% end %>
-
-<hr>
-
-<h3>Add a Review:</h3>
-<%= form_with(model: [@book, Review.new], local: true) do |form| %>
-  <div>
-    <%= form.label :rating %><br>
-    <%= form.number_field :rating, in: 1..5 %>
   </div>
 
-  <div>
-    <%= form.label :comment %><br>
-    <%= form.text_area :comment %>
+  <div class="mb-4">
+    <h4>Add a Review</h4>
+    <div class="card p-3">
+      <%= form_with(model: [@book, Review.new], local: true) do |form| %>
+        <div class="mb-3">
+          <%= form.label :rating, class: "form-label" %>
+          <%= form.number_field :rating, in: 1..5, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :comment, class: "form-label" %>
+          <%= form.text_area :comment, class: "form-control", rows: 3 %>
+        </div>
+
+        <%= form.submit "Submit Review", class: "btn btn-success" %>
+      <% end %>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit "Submit Review" %>
+  <hr>
+
+  <div class="d-flex flex-wrap gap-2">
+    <%= link_to "Edit This Book", edit_book_path(@book), class: "btn btn-outline-primary" %>
+    <%= link_to "Back to Books", books_path, class: "btn btn-outline-secondary" %>
+    <%= button_to "Destroy This Book", @book, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
   </div>
-<% end %>
 
-<hr>
-
-<div>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %> |
-  <%= button_to "Destroy this book", @book, method: :delete, data: { confirm: "Are you sure?" } %>
 </div>
