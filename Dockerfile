@@ -39,6 +39,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     npm install --global yarn
 
 # Install application gems
+
+# Applicatio gem
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
