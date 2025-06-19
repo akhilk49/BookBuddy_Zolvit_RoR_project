@@ -20,21 +20,5 @@ test:
   port: 5432
 
 production:
-  primary: &primary_production
-    <<: *default
-    database: bookbuddy_production
-    username: <%= ENV["BOOKBUDDY_DB_USERNAME"] %>
-    password: <%= ENV["BOOKBUDDY_DB_PASSWORD"] %>
-    host: <%= ENV["BOOKBUDDY_DB_HOST"] %>
-  cache:
-    <<: *primary_production
-    database: bookbuddy_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: bookbuddy_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: bookbuddy_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
